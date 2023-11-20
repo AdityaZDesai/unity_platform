@@ -3,13 +3,19 @@ using UnityEngine;
 public class PlayerMovement2D : MonoBehaviour
 {
     public float speed = 5.0f;
+    public Rigidbody2D rb;
+    public float jumpAmount = 10f;
 
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
 
-        Vector2 movement = new Vector2(horizontal, vertical) * speed * Time.deltaTime;
-        transform.Translate(movement);
+
+        
+        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) < 0.01f)
+        {
+            rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+        }
     }
 }
