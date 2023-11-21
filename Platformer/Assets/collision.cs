@@ -14,6 +14,12 @@ public class collision : MonoBehaviour
             transform.position = new Vector2(-12, -3);
         }
 
+        if (collision.gameObject.name == "Flag")
+        {
+            //If the GameObject's name matches the one you suggest, output this message in the console
+            Debug.Log("end game");
+        }
+
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
         if (collision.gameObject.tag == "Respawn")
         {
