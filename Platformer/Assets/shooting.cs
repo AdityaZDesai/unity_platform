@@ -25,7 +25,7 @@ public class shooting : MonoBehaviour
             Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 270);
 
             // Use the gun's position as the spawn point.
-            Vector2 spawnPosition = gunTransform.position;
+            Vector2 spawnPosition = gunTransform.position ;
 
             // Create the bullet at the spawn position with the gun's rotation.
             GameObject g = Instantiate(bullet, spawnPosition, newRotation);
