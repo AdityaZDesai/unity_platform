@@ -10,6 +10,7 @@ public class shooting : MonoBehaviour
     public GameObject bullet;
     public Transform gunTransform; // Reference to the transform of the gun.
 
+    public AudioSource audioSource;
     public Transform gun_pivot;
 
     // Maximum distance for full rotation speed
@@ -47,7 +48,7 @@ public class shooting : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {   
-
+            audioSource.Play();
             Quaternion currentRotation = gunTransform.rotation;
 
             // Add 270 degrees to the current rotation
