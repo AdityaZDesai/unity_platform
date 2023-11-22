@@ -6,6 +6,8 @@ public class shooting : MonoBehaviour
 {
     public float speed = 5.0f;
     public GameObject bullet;
+    public Transform gunTransform; // Reference to the transform of the gun.
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,11 +17,14 @@ public class shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-                if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            GameObject g = Instantiate(bullet, (Vector2)touchPos,transform.rotation);
+            // Use the gun's position as the spawn point.
+            Vector2 spawnPosition = gunTransform.position;
+
+            // Create the bullet at the spawn position with the gun's rotation.
+            GameObject g = Instantiate(bullet, spawnPosition, gunTransform.rotation);
             g.SetActive(true);
-    }
+        }
     }
 }
