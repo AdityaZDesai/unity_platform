@@ -9,7 +9,7 @@ public class projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.rotation = Quaternion.Euler(0f, 0f, 270f);
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)

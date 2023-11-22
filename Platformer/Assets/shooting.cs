@@ -19,11 +19,16 @@ public class shooting : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Quaternion currentRotation = gunTransform.rotation;
+
+            // Add 270 degrees to the current rotation
+            Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 270);
+
             // Use the gun's position as the spawn point.
             Vector2 spawnPosition = gunTransform.position;
 
             // Create the bullet at the spawn position with the gun's rotation.
-            GameObject g = Instantiate(bullet, spawnPosition, gunTransform.rotation);
+            GameObject g = Instantiate(bullet, spawnPosition, newRotation);
             g.SetActive(true);
         }
     }
