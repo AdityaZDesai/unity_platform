@@ -14,11 +14,10 @@ public class projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Spike")
+        if (collision.collider != null)
         {
-            Debug.Log("end game");
-            gameObject.SetActive(false);
-            //If the GameObject's name matches the one you suggest, output this message in the console
+            // Destroy the GameObject when it collides with anything
+            Destroy(gameObject);
         }
 
     }
