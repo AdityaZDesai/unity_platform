@@ -404,8 +404,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  maxDistance: 5
+  baseRotationSpeed: 5
   bullet: {fileID: 7309750095010600842, guid: 79ef6f09926f664489b7e030862c63c7, type: 3}
   gunTransform: {fileID: 3526331516080096921}
+  gun_pivot: {fileID: 901232075}
 --- !u!1 &910299504
 GameObject:
   m_ObjectHideFlags: 0
