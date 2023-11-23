@@ -53,9 +53,8 @@ public class shooting : MonoBehaviour
 
             if (audioSource != null)
             {
-                // Configure the audio source properties (e.g., volume, play on awake).
-                audioSource.volume = 1.0f; // Adjust volume as needed.
-                audioSource.playOnAwake = false; // Ensure it's set according to your requirements.
+                audioSource.volume = 0.25f; // Adjust volume
+                audioSource.playOnAwake = false; 
                 
                 // Play the sound.
                 audioSource.Play();

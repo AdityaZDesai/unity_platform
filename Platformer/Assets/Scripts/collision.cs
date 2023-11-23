@@ -4,18 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class collision : MonoBehaviour
-{
+{   
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform respawnPoint;
 
+        void Start()
+    {
+        // Get the Rigidbody component attached to this object.
+        rb = GetComponent<Rigidbody2D>();
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
-
-        //Check for a match with the specified name on any GameObject that collides with your GameObject
-        if (collision.gameObject.name == "Spike")
-        {
-            //If the GameObject's name matches the one you suggest, output this message in the console
-            string currentSceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(currentSceneName);
-        }
 
         if (collision.gameObject.name == "Flag")
         {
@@ -24,10 +23,11 @@ public class collision : MonoBehaviour
         }
 
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
-        if (collision.gameObject.tag == "Respawn")
+        if (collision.gameObject.tag == "Harmful")
         {
-            //If the GameObject has the same tag as specified, output this message in the console
-            Debug.Log("Do something else here");
+            transform.position = respawnPoint.transform.position;
+            rb.velocity = Vector2.zero;
+            transform.rotation = Quaternion.identity;
         }
     }
 }
