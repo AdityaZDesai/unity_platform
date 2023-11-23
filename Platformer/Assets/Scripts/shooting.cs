@@ -10,7 +10,7 @@ public class shooting : MonoBehaviour
     public GameObject bullet;
     public Transform gunTransform; // Reference to the transform of the gun.
 
-    public AudioSource audioSource;
+    public GameObject audioPrefab;
     public Transform gun_pivot;
 
     // Maximum distance for full rotation speed
@@ -48,7 +48,18 @@ public class shooting : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {   
-            audioSource.Play();
+            GameObject soundObject = Instantiate(audioPrefab, gunTransform.position, Quaternion.identity);
+            AudioSource audioSource = soundObject.GetComponent<AudioSource>();
+
+            if (audioSource != null)
+            {
+                // Configure the audio source properties (e.g., volume, play on awake).
+                audioSource.volume = 1.0f; // Adjust volume as needed.
+                audioSource.playOnAwake = false; // Ensure it's set according to your requirements.
+                
+                // Play the sound.
+                audioSource.Play();
+            }
             Quaternion currentRotation = gunTransform.rotation;
 
             // Add 270 degrees to the current rotation
