@@ -11,7 +11,10 @@ public class shooting : MonoBehaviour
     public Transform gunTransform; // Reference to the transform of the gun.
 
     public GameObject audioPrefab;
-    public Transform gun_pivot;
+    private Vector3 mouse_pos;
+    public Transform target;
+    private Vector3 object_pos;
+    private float angle;
 
     // Maximum distance for full rotation speed
 
@@ -25,26 +28,13 @@ public class shooting : MonoBehaviour
     void Update()
     {
         // Get the mouse position in screen coordinates
-        Vector3 mousePos = Input.mousePosition;
-        
-        // Convert the mouse position to a point in the game world
-        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, 10.0f)); // 10.0f is the distance from the camera
-
-        // Calculate the direction from the gun to the mouse position
-        Vector3 direction = mousePos - gun_pivot.position;
-        direction.z = 0; // Make sure the gun doesn't rotate in the z-axis
-
-        // Calculate the angle in radians
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Calculate the rotation speed based on the distance
-        float distance = direction.magnitude;
-        float rotationSpeed = baseRotationSpeed * (1.0f - Mathf.Clamp01(distance / maxDistance));
-
-        // Rotate the gun towards the mouse position smoothly
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
-    
+            mouse_pos = Input.mousePosition;
+            mouse_pos.z = 0;
+            object_pos = Camera.main.WorldToScreenPoint(target.position);
+            mouse_pos.x = mouse_pos.x - object_pos.x;
+            mouse_pos.y = mouse_pos.y - object_pos.y;
+            angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
 
         if (Input.GetMouseButtonDown(0))
         {   
